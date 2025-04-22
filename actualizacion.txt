@@ -1,0 +1,7 @@
+git remote set-url origin https://gitlab.com/facturaperu/facturadorpro4.git
+
+composer install
+composer update
+php artisan migrate
+php artisan tenancy:migrate
+

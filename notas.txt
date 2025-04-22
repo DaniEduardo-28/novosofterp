@@ -1,0 +1,11 @@
+GUÍA REMISIÓN cuando es kit:
+•⁠  ⁠cuando es kit sin detalle OK
+•⁠  ⁠⁠qué jale la dirección del cliente para la guía de remisión La dirección de entrega del cliente( no está jalando)
+
+En FACTURA cuando es Kit
+ Que no muestre fecha de vcto y no muestre no muestre laboratorio
+•⁠  ⁠en el detalle añadir 2 columnas: Paciente y Ciclo  (esto tambien en guia de remision)
+
+
+En ORDEN DE PEDIDO
+•⁠  ⁠Colocar lugar de entrega que jale desde la data ingresada en la ficha del cliente

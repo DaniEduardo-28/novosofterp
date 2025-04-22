@@ -1,0 +1,32 @@
+<?php
+
+    namespace Modules\Digemid\Http\Resources;
+
+    use Illuminate\Http\Request;
+    use Illuminate\Http\Resources\Json\ResourceCollection;
+    use Modules\Digemid\Models\Manufacturer;
+
+    class ManufacturerCollection extends ResourceCollection
+    {
+        /**
+         * Transform the resource collection into an array.
+         *
+         * @param Request $request
+         *
+         * @return array
+         */
+        public function toArray($request)
+        {
+            return $this->collection->transform(function (Manufacturer $row, $key) {
+
+                return [
+                    'id' => $row->id,
+                    'codigo' => $row->codigo,
+                    'name' => $row->name,
+                    'status' => (bool) $row->status
+                ];
+            });
+
+        }
+
+    }
