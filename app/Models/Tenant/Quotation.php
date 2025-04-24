@@ -8,6 +8,9 @@ use App\Traits\SellerIdTrait;
 use Illuminate\Support\Collection;
 use Modules\Order\Models\OrderNote;
 use Modules\Sale\Models\SaleOpportunity;
+use Modules\Digemid\Models\Patients;
+use Modules\Digemid\Models\Cycles;
+use Modules\Purchase\Models\PurchaseOrder;
 use Modules\Sale\Models\QuotationPayment;
 use Modules\Sale\Models\Contract;
 
@@ -52,6 +55,9 @@ class Quotation extends ModelTenant
         'total_other_taxes',
         'total_taxes',
         'total_value',
+        'patients_id',
+        'cycles_id',
+        'purchase_order_id',
         'total',
         'charges',
         'discounts',
@@ -213,6 +219,22 @@ class Quotation extends ModelTenant
     public function person() {
         return $this->belongsTo(Person::class, 'customer_id');
     }
+
+    public function patient()
+{
+    return $this->belongsTo(Patients::class, 'patients_id');
+}
+
+public function cycle()
+{
+    return $this->belongsTo(Cycles::class, 'cycles_id');
+}
+
+public function purchase_order()
+{
+    return $this->belongsTo(PurchaseOrder::class, 'purchase_order_id');
+}
+
 
 
     public function currency_type()
@@ -379,6 +401,9 @@ class Quotation extends ModelTenant
             'user_name' => $row->user->name,
             'seller_name' => $seller->name,
             'customer_id' => $row->customer_id,
+            'patients_id' => $row->patients_id,
+'cycles_id' => $row->cycles_id,
+'purchase_order_id' => $row->purchase_order_id,
             'customer_name' => $row->customer->name,
             'customer_number' => $row->customer->number,
             'customer_telephone' => $row->customer->telephone,

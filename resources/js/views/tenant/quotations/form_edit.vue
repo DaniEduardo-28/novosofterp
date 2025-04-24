@@ -142,16 +142,46 @@
                                 </div>
                             </div>
 
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="form-group col-6 col-md-2">
-                                        <label>Vendedor</label>
-                                        <el-select v-model="form.seller_id" clearable>
-                                            <el-option v-for="sel in sellers" :key="sel.id" :value="sel.id"
-                                                       :label="sel.name">{{ sel.name }}
-                                            </el-option>
-                                        </el-select>
-                                    </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">Vendedor</label>
+                                    <el-select v-model="form.seller_id" clearable>
+                                        <el-option v-for="sel in sellers" :key="sel.id" :value="sel.id"
+                                            :label="sel.name" />
+                                    </el-select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">Paciente</label>
+                                    <el-select v-model="form.patients_id" filterable clearable
+                                        placeholder="Seleccione un paciente">
+                                        <el-option v-for="option in patients" :key="option.id" :value="option.id"
+                                            :label="option.name" />
+                                    </el-select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">Ciclo</label>
+                                    <el-select v-model="form.cycles_id" filterable clearable
+                                        placeholder="Seleccione un ciclo">
+                                        <el-option v-for="option in cycles" :key="option.id" :value="option.id"
+                                            :label="option.name" />
+                                    </el-select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">Orden de Compra</label>
+                                    <el-select v-model="form.purchase_order_id" filterable clearable
+                                        placeholder="Seleccione una orden">
+                                        <el-option v-for="option in purchase_orders" :key="option.id" :value="option.id"
+                                            :label="option.number" />
+                                    </el-select>
                                 </div>
                             </div>
 
@@ -450,6 +480,9 @@ export default {
             charges_types: [],
             all_customers: [],
             customers: [],
+            patients: [],
+            cycles: [],
+            purchase_orders: [],
             company: null,
             establishments: [],
             establishment: null,
@@ -478,6 +511,9 @@ export default {
                 this.discount_types = response.data.discount_types
                 this.charges_types = response.data.charges_types
                 this.company = response.data.company
+                this.patients = response.data.patients
+                this.cycles = response.data.cycles
+                this.purchase_orders = response.data.purchase_orders
                 this.form.currency_type_id = (this.currency_types.length > 0) ? this.currency_types[0].id : null
                 this.form.establishment_id = (this.establishments.length > 0) ? this.establishments[0].id : null
                 this.payment_method_types = response.data.payment_method_types
@@ -712,6 +748,9 @@ export default {
                 total_unaffected: 0,
                 total_exonerated: 0,
                 total_igv_free: 0,
+                patients_id: null,
+                cycles_id: null,
+                purchase_order_id: null,
                 total_igv: 0,
                 total_base_isc: 0,
                 total_isc: 0,

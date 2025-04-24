@@ -60,6 +60,14 @@ class QuotationResource extends JsonResource
             'customer_telephone' => optional($quotation->person)->telephone,
             // 'customer_telephone' => $this->customer->telephone ?? null,
             'customer_id' => $this->customer_id,
+
+            'patients_id' => $this->patients_id,
+            'cycles_id' => $this->cycles_id,
+            'purchase_order_id' => $this->purchase_order_id,
+
+            'patient' => $this->whenLoaded('patient'),
+            'cycle' => $this->whenLoaded('cycle'),
+            'purchase_order' => $this->whenLoaded('purchase_order'),
         ];
     }
 
