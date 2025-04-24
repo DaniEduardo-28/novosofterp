@@ -396,7 +396,14 @@
             <tr>
                 <td width="120px">ORDEN DE COMPRA</td>
                 <td width="8px">:</td>
-                <td>{{ $document->purchase_order }}</td>
+                <td>{{ strtoupper($document->purchase_order) }}</td>
+            </tr>
+        @endif
+        @if ($document->patients_id)
+            <tr>
+                <td width="120px">PACIENTE</td>
+                <td width="8px">:</td>
+                <td>{{ strtoupper($document->patients->name . ' ' . $document->patients->last_name) }}</td>
             </tr>
         @endif
         @if ($document->quotation_id)

@@ -435,15 +435,15 @@ export default {
       form_category: { add: false, name: null, id: null },
       form_cycles: { add: false, name: null, id: null },
       form_customer: {
-  add: false,
-  id: null,
-  name: null,
-  addresses: [],
-  number: '00000000',
-  identity_document_type_id: '1',
-  country_id: 'PE', // ejemplo Perú
-  type: 'customers',
-},
+        add: false,
+        id: null,
+        name: null,
+        addresses: [],
+        number: '00000000',
+        identity_document_type_id: '1',
+        country_id: 'PE', // ejemplo Perú
+        type: 'customers',
+      },
       form_patients: {
         add: false,
         name: null,

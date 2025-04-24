@@ -20,7 +20,7 @@
                                 <br>
                                 <span v-if="establishment.email != '-'">{{
                                     establishment.email
-                                }} </span><span v-if="establishment.telephone != '-'">- {{
+                                    }} </span><span v-if="establishment.telephone != '-'">- {{
                                         establishment.telephone
                                     }}</span>
                             </address>
@@ -376,7 +376,7 @@
                                                         <td>ICBPER:</td>
                                                         <td>{{ currency_type.symbol }} {{
                                                             form.total_plastic_bag_taxes
-                                                            }}
+                                                        }}
                                                         </td>
                                                     </tr>
 
@@ -459,7 +459,7 @@
                                                             <td>M. PENDIENTE:</td>
                                                             <td>{{ currency_type.symbol }} {{
                                                                 form.total_pending_payment
-                                                                }}
+                                                            }}
                                                             </td>
                                                         </tr>
                                                     </template>
@@ -524,12 +524,13 @@
                                                             <!-- Credito -->
                                                             <div v-if="form.payment_condition_id === '02'"
                                                                 class="table-responsive">
-                                                                <table v-if="form.fee.length > 0" class="text-left table"
-                                                                    width="100%">
+                                                                <table v-if="form.fee.length > 0"
+                                                                    class="text-left table" width="100%">
                                                                     <thead>
                                                                         <tr>
                                                                             <th v-if="form.fee.length > 0"
-                                                                                style="width: 120px">Método de pago
+                                                                                style="width: 120px">Método de
+                                                                                pago
                                                                             </th>
                                                                             <th class="text-left" style="width: 100px">
                                                                                 Fecha
@@ -581,7 +582,8 @@
                                                                             </template>
 
                                                                             <th v-if="form.payments.length > 0"
-                                                                                style="width: 120px">Método de
+                                                                                style="width: 120px">Método
+                                                                                de
                                                                                 pago
                                                                             </th>
                                                                             <template v-if="enabled_payments">
@@ -612,7 +614,8 @@
                                                                             <template v-if="showLoadVoucher">
                                                                                 <td class="" style="width: 50px">
                                                                                     <!-- <el-tooltip class="item" content="Cargar voucher" effect="dark" placement="top-start"> -->
-                                                                                    <el-upload :data="{ 'index': index }"
+                                                                                    <el-upload
+                                                                                        :data="{ 'index': index }"
                                                                                         :headers="headers_token"
                                                                                         :multiple="false"
                                                                                         :on-remove="(file, fileList) => handleRemoveUploadVoucher(file, fileList, index)"
@@ -806,8 +809,8 @@
                                         <td>OTROS CARGOS:</td>
                                         <td>{{ currency_type.symbol }}
                                             <el-input-number v-model="total_global_charge"
-                                                :disabled="config.active_allowance_charge == true ? true : false" :min="0"
-                                                class="input-custom" controls-position="right"
+                                                :disabled="config.active_allowance_charge == true ? true : false"
+                                                :min="0" class="input-custom" controls-position="right"
                                                 @change="calculateTotal"></el-input-number>
                                         </td>
                                     </tr>
@@ -897,7 +900,8 @@
                                                 <table v-if="form.fee.length > 0" class="text-left" width="100%">
                                                     <thead>
                                                         <tr>
-                                                            <th v-if="form.fee.length > 0" style="width: 120px">Método de
+                                                            <th v-if="form.fee.length > 0" style="width: 120px">Método
+                                                                de
                                                                 pago
                                                             </th>
                                                             <th class="text-left" style="width: 100px">Fecha
@@ -936,7 +940,8 @@
                                                     <thead>
                                                         <tr>
 
-                                                            <template v-if="showLoadVoucher && form.payments.length > 0">
+                                                            <template
+                                                                v-if="showLoadVoucher && form.payments.length > 0">
                                                                 <th style="width:50px">Voucher</th>
                                                             </template>
 
@@ -944,7 +949,8 @@
                                                                 Método de pago
                                                             </th>
                                                             <template v-if="enabled_payments">
-                                                                <th v-if="form.payments.length > 0" style="width: 120px">
+                                                                <th v-if="form.payments.length > 0"
+                                                                    style="width: 120px">
                                                                     Destino
                                                                     <el-tooltip class="item"
                                                                         content="Aperture caja o cuentas bancarias"
@@ -952,10 +958,12 @@
                                                                         <i class="fa fa-info-circle"></i>
                                                                     </el-tooltip>
                                                                 </th>
-                                                                <th v-if="form.payments.length > 0" style="width: 100px">
+                                                                <th v-if="form.payments.length > 0"
+                                                                    style="width: 100px">
                                                                     Referencia
                                                                 </th>
-                                                                <th v-if="form.payments.length > 0" style="width: 100px">
+                                                                <th v-if="form.payments.length > 0"
+                                                                    style="width: 100px">
                                                                     Monto
                                                                 </th>
                                                                 <th style="width: 30px"></th>
@@ -1306,8 +1314,22 @@
                                         </div>
                                         <div class="col-12 py-2 border-top">
                                             <label class="control-label">Paciente</label>
+                                            <a v-if="form_patients.add == false"
+                                                class="control-label font-weight-bold text-info" href="#"
+                                                @click="form_patients.add = true">
+                                                [ + Nuevo]</a>
+                                            <a v-if="form_patients.add == true"
+                                                class="control-label font-weight-bold text-info" href="#"
+                                                @click="savePatients()">
+                                                [ + Guardar]</a>
+                                            <a v-if="form_patients.add == true"
+                                                class="control-label font-weight-bold text-danger" href="#"
+                                                @click="form_patients.add = false">
+                                                [ Cancelar]</a>
+                                            <el-input v-if="form_patients.add == true" v-model="form_patients.name"
+                                                dusk="item_code" style="margin-bottom: 1.5%"></el-input>
                                             <el-select v-model="form.patients_id" filterable clearable
-                                                placeholder="Seleccionar">
+                                                placeholder="Seleccionar" v-if="form_patients.add == false">
                                                 <el-option v-for="option in patients" :key="option.id"
                                                     :value="option.id" :label="option.description"></el-option>
                                             </el-select>
@@ -1511,6 +1533,18 @@ export default {
             focus_on_client: false,
             dateValid: false,
             input_person: {},
+            form_patients: {
+                add: false,
+                name: null,
+                id: null,
+                identity_document_type_id: 1,
+                number: '00000000',
+                last_name: '',
+                address: '',
+                ubigeo: '010101',
+                phone: '',
+                email: null,
+            },
             showDialogDocumentDetraction: false,
             has_data_detraction: false,
             showDialogFormHotel: false,
@@ -4062,6 +4096,24 @@ export default {
             if (code === 'Escape') {
                 if (this.showDialogAddItem) this.showDialogAddItem = false
             }
+        },
+        savePatients() {
+            this.form_patients.add = false;
+            this.$http
+                .post(`/patient`, this.form_patients)
+                .then((response) => {
+                    if (response.data.success) {
+                        this.$message.success(response.data.message);
+                        this.patients.push({
+                            id: response.data.id,
+                            description: response.data.data.name
+                        });
+                        this.form_patients.name = null;
+                    } else {
+                        this.$message.error("No se guardaron los cambios");
+                    }
+                })
+                .catch((error) => { });
         },
         openDialogLots(item) {
             console.log(item);

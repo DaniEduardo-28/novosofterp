@@ -58,11 +58,12 @@ class DispatchAddressController extends Controller
                 $department_id = $row->location_id[0];
                 $province_id = $row->location_id[1];
                 $district_id = $row->location_id[2];
-                $filtered_district = null;
+                $filtered_department = null;
                 $filtered_province = null;
                 $filtered_district = null;
                 foreach ($locations as $department) {
                     if ($department['value'] == $department_id) {
+                        $filtered_department =  $department["label"];
                         foreach ($department['children'] as $province) {
                             if ($province['value'] == $province_id) {
                                 $filtered_province = $province;
@@ -80,7 +81,7 @@ class DispatchAddressController extends Controller
                 return [
                     'id' => $row->id,
                     'location_id' => $row->location_id,
-                    'address' => " - " . $row->address . " , " . $filtered_district["label"] . " - " . $filtered_province["label"] . " - " . $department["label"],
+                    'address' => " - " . $row->address . " , " . $filtered_district["label"] . " - " . $filtered_province["label"] . " - " .  $filtered_department,
                 ];
             });
     }
