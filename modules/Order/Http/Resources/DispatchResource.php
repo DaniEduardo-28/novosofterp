@@ -59,6 +59,8 @@ class DispatchResource extends JsonResource
             'download_cdr' => $this->download_external_cdr,
             'message_text' => "Su guía {$this->number_full} ha sido generada correctamente, puede revisarla en el siguiente enlace: ".url('')."/downloads/dispatch/pdf/{$this->external_id}"."",
 
+            'patients_id' => $this->patients_id,
+            'cycles_id' => $this->cycles_id,
             'send_to_pse' => $this->send_to_pse,
             'response_signature_pse' => optional($this->response_signature_pse)->message,
             'response_send_cdr_pse' => optional($this->response_send_cdr_pse)->message,

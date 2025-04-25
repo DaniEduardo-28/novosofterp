@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\DB;
+use Modules\Digemid\Models\Patients;
+use Modules\Digemid\Models\Cycles;
 use Modules\Dispatch\Models\DispatchAddress;
 use Modules\Order\Models\OrderForm;
 use Modules\Inventory\Models\InventoryKardex;
@@ -102,6 +104,8 @@ class Dispatch extends ModelTenant
         'dispatcher',
         'driver_id',
         'driver',
+        'patients_id',
+        'cycles_id',
         'transport_id',
         'license_plate',
 
@@ -314,6 +318,16 @@ class Dispatch extends ModelTenant
     {
         return $this->belongsTo(DocumentType::class, 'document_type_id');
     }
+
+    public function patient()
+{
+    return $this->belongsTo(Patients::class, 'patients_id');
+}
+
+public function cycle()
+{
+    return $this->belongsTo(Cycles::class, 'cycles_id');
+}
 
     /**
      * @return BelongsTo
@@ -606,6 +620,8 @@ class Dispatch extends ModelTenant
             'dispatcher' => $this->dispatcher,
             'type_disparcher' => $this->getTypeDispatcher(),
             'has_cdr' => $has_cdr,
+            'patients_id' => $this->patients_id,
+            'cycles_id' => $this->cycles_id,
             'download_external_xml' => $this->download_external_xml,
             'download_external_pdf' => $this->download_external_pdf,
             'download_external_cdr' => $this->download_external_cdr,

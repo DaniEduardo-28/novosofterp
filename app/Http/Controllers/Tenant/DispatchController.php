@@ -22,6 +22,8 @@ use App\Models\Tenant\Item;
 use App\Models\Tenant\PaymentMethodType;
 use App\Models\Tenant\Person;
 use App\Models\Tenant\Quotation;
+use Modules\Digemid\Models\Patients;
+use Modules\Digemid\Models\Cycles;
 use App\Models\Tenant\SaleNote;
 use App\Models\Tenant\Series;
 use Exception;
@@ -234,6 +236,8 @@ class DispatchController extends Controller
                 'transport_id' => $document->transport_id,
                 'origin_address_id' => $document->origin_address_id,
                 'delivery_address_id' => $document->delivery_address_id,
+                'patients_id' => $document->patients_id,
+                'cycles_id' => $document->cycles_id,
             ];
         }
         else if ($parentTable === 'purchase'){
@@ -259,6 +263,8 @@ class DispatchController extends Controller
                 'reference_order_form_id' => $reference_order_form_id,
                 'reference_purchase_id' => $reference_purchase_id,
                 'reference_order_note_id' => $reference_order_note_id,
+                'patients_id' => $document->patients_id,
+                'cycles_id' => $document->cycles_id,
             ];
         }
 
@@ -314,6 +320,7 @@ class DispatchController extends Controller
 
     public function store(DispatchRequest $request)
     {
+        dd($request->all());
         $company = Company::query()
             ->select('soap_type_id')
             ->first();
@@ -513,6 +520,8 @@ class DispatchController extends Controller
         $establishments = Establishment::all();
         $series = Series::all()->toArray();
         $company = Company::select('number')->first();
+        $patients = Patients::select('id', 'name')->get();
+        $cycles = Cycles::select('id', 'name')->get();
         $drivers = (new DriverController())->getOptions();
         $transports = (new TransportController())->getOptions();
         $dispatchers = (new DispatcherController())->getOptions();
@@ -537,7 +546,9 @@ class DispatchController extends Controller
             'dispatchers',
             'transports',
             'related_document_types',
-            'itemsFromSummary'
+            'itemsFromSummary',
+            'patients', 
+            'cycles'
         );
     }
 

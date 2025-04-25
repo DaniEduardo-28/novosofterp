@@ -1058,6 +1058,8 @@ export default {
         driver: {},
         transport_id: null,
         transport: {},
+        patients_id: null, 
+  cycles_id: null,
         items: [],
         reference_order_form_id: null,
         // license_plate: null,
@@ -1561,14 +1563,17 @@ export default {
           }
         })
         .catch((error) => {
-          this.loading_submit = false;
+  this.loading_submit = false;
 
-          if (error.response.status === 422) {
-            this.errors = error.response.data;
-          } else {
-            this.$message.error(error.response.data.message);
-          }
-        })
+  if (error.response && error.response.status === 422) {
+    this.errors = error.response.data;
+  } else if (error.response) {
+    this.$message.error(error.response.data.message);
+  } else {
+    console.error(error);
+    this.$message.error("Error de conexión o respuesta inválida del servidor.");
+  }
+})
         .then(() => {
           this.setDefaultCustomer();
           this.loading_submit = false;
