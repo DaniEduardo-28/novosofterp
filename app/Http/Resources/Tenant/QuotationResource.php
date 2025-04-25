@@ -21,6 +21,10 @@ class QuotationResource extends JsonResource
     public function toArray($request)
     {
         $quotation = Quotation::find($this->id);
+
+        $quotation->patients_id = $this->patients_id;
+$quotation->cycles_id = $this->cycles_id;
+$quotation->purchase_order_id = $this->purchase_order_id;
         $quotation->payments = self::getTransformPayments($quotation->payments);
         $quotation->items = self::getTransformItems($quotation->items);
 

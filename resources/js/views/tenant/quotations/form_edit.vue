@@ -180,7 +180,7 @@
                                     <el-select v-model="form.purchase_order_id" filterable clearable
                                         placeholder="Seleccione una orden">
                                         <el-option v-for="option in purchase_orders" :key="option.id" :value="option.id"
-                                            :label="option.number" />
+                                        :label="`${option.prefix}-${option.id}`" />
                                     </el-select>
                                 </div>
                             </div>
@@ -673,6 +673,7 @@ export default {
                 .then(response => {
 
                     let dato = response.data.data.quotation
+                    console.log('DATOS CARGADOS:', dato)
                     //  console.log(dato)
                     this.form.id = dato.id
                     this.form.customer_id = dato.customer_id
@@ -685,6 +686,9 @@ export default {
                     this.form.description = dato.description
                     this.form.shipping_address = dato.shipping_address
                     this.form.account_number = dato.account_number
+                    this.form.patients_id = dato.patients_id
+                    this.form.cycles_id = dato.cycles_id
+                    this.form.purchase_order_id = dato.purchase_order_id
                     this.form.terms_condition = dato.terms_condition
                     this.form.seller_id = dato.seller_id
                     this.form.active_terms_condition = dato.terms_condition ? true : false
