@@ -615,7 +615,7 @@
                         <!-- @todo: Mejorar evitando duplicar codigo -->
                         <!-- Mostrar en cel -->
                         <div class="row hidden-md-up">
-                            <div class="col-12 text-center">
+                            <div class="col-12 text-center" v-if="form.customer_id">
 
                                 <button class="btn waves-effect waves-light btn-primary btn-sm" style="width: 180px;"
                                     type="button" @click.prevent="clickAddItemInvoice">+ Agregar Producto

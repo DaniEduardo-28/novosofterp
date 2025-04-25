@@ -37,6 +37,9 @@
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Str;
+    use Modules\Digemid\Models\Patients;
+    use Modules\Digemid\Models\Cycles;
+    use Modules\Purchase\Models\PurchaseOrder;
     use Modules\Finance\Traits\FinanceTrait;
     use Modules\Order\Http\Requests\OrderNoteRequest;
     use Modules\Order\Http\Resources\OrderNoteCollection;
@@ -232,8 +235,12 @@
             $company = Company::active();
             $document_type_03_filter = config('tenant.document_type_03_filter');
             $payment_method_types = PaymentMethodType::orderBy('id', 'desc')->get();
+            $patients = Patients::select('id', 'name')->get();
+            $cycles = Cycles::select('id', 'name')->get();
+            $purchase_orders = PurchaseOrder::select('id', 'prefix')->get();
+            
 
-            return compact('customers', 'establishments', 'currency_types', 'discount_types', 'charge_types', 'company', 'document_type_03_filter', 'payment_method_types');
+            return compact('customers', 'establishments', 'currency_types', 'discount_types', 'charge_types', 'company', 'document_type_03_filter', 'payment_method_types', 'patients', 'cycles', 'purchase_orders');
         }
 
         public function table($table)

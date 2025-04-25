@@ -10,6 +10,9 @@
     use App\Models\Tenant\PaymentMethodType;
     use App\Models\Tenant\Person;
     use App\Models\Tenant\Quotation;
+    use Modules\Digemid\Models\Patients;
+    use Modules\Digemid\Models\Cycles;
+    use Modules\Purchase\Models\PurchaseOrder;
     use App\Models\Tenant\SaleNote;
     use App\Models\Tenant\SoapType;
     use App\Models\Tenant\StateType;
@@ -153,6 +156,9 @@
             'total_other_taxes',
             'total_taxes',
             'total_value',
+            'patients_id',
+            'cycles_id',
+            'purchase_order_id',
             'total',
             'charges',
             'discounts',
@@ -341,6 +347,30 @@
         public function state_type()
         {
             return $this->belongsTo(StateType::class);
+        }
+
+        /**
+         * @return BelongsTo
+         */
+        public function patient()
+        {
+            return $this->belongsTo(Patients::class, 'patients_id');
+        }
+
+        /**
+         * @return BelongsTo
+         */
+        public function purchase_order()
+        {
+            return $this->belongsTo(PurchaseOrder::class, 'purchase_order_id');
+        }
+
+        /**
+         * @return BelongsTo
+         */
+        public function cycle()
+        {
+            return $this->belongsTo(Cycles::class, 'cycles_id');
         }
 
         /**
@@ -604,6 +634,9 @@
                 'identifier' => $this->identifier,
                 'user_name' => $this->user->name,
                 'customer_name' => $this->customer->name,
+                'patients_id' => $this->patients_id,
+                'cycles_id' => $this->cycles_id,
+                'purchase_order_id' => $this->purchase_order_id,
                 'customer_number' => $this->customer->number,
                 'customer_telephone' => optional($this->customer)->telephone,
                 'customer_email' => optional($this->customer)->email,
