@@ -105,6 +105,8 @@ class DocumentResource extends JsonResource
             'customer_telephone' => optional($document->person)->telephone,
             'message_text' => $msg_text,
             'sales_note' => $nvs,
+            'patients_id' => $document->patients_id,
+            'cycles_id' => $document->cycles_id,
             'send_to_pse' => $document->send_to_pse,
             'response_signature_pse' => optional($document->response_signature_pse)->message,
             'response_send_cdr_pse' => optional($document->response_send_cdr_pse)->message,

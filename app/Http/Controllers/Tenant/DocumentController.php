@@ -1191,6 +1191,8 @@ class DocumentController extends Controller
         $item_id = $request->item_id;
         $category_id = $request->category_id;
         $purchase_order = $request->purchase_order;
+        $cycles_id = $request->cycles_id;
+        $patients_id = $request->patients_id;
         $guides = $request->guides;
         $plate_numbers = $request->plate_numbers;
 
@@ -1225,6 +1227,14 @@ class DocumentController extends Controller
 
         if ($customer_id) {
             $records->where('customer_id', $customer_id);
+        }
+
+        if ($patients_id) {
+            $records->where('patients_id', $patients_id);
+        }
+
+        if ($cycles_id) {
+            $records->where('cycles_id', $cycles_id);
         }
 
         if ($item_id) {

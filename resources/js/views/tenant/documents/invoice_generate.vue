@@ -111,7 +111,7 @@
                             </div>
                             <div class="col-lg-2 align-self-end">
                                 <div :class="{ 'has-danger': errors.currency_type_id }" class="form-group">
-                                    <label class="control-label">Moneda</label>
+                                    <label class="control-label">Moneda222</label>
                                     <el-select v-model="form.currency_type_id" @change="changeCurrencyType">
                                         <el-option v-for="option in currency_types" :key="option.id"
                                             :label="option.description" :value="option.id"></el-option>
@@ -1863,6 +1863,8 @@ export default {
                 customer_id: null,
                 currency_type_id: this.config.currency_type_id,
                 purchase_order: null,
+                patients_id: null,
+                cycles_id: null,
                 exchange_rate_sale: 0,
                 total_prepayment: 0,
                 total_charge: 0,
@@ -2145,6 +2147,8 @@ export default {
             this.form.sale_notes_relateds = data.sale_notes_relateds ? data.sale_notes_relateds : null
             this.form.affectation_type_prepayment = data.affectation_type_prepayment;
             this.form.purchase_order = data.purchase_order;
+            this.form.patients_id = data.patients_id;
+            this.form.cycles_id = data.cycles_id;
             this.form.pending_amount_prepayment = data.pending_amount_prepayment || 0;
             this.form.payment_method_type_id = data.payment_method_type_id;
             this.form.charges = data.charges || [];
