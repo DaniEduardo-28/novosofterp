@@ -23,8 +23,21 @@ class OrderNoteResource extends JsonResource
             'identifier' => $this->identifier,
             'date_of_issue' => $this->date_of_issue->format('Y-m-d'),
             'patients_id' => $this->patients_id,
-            'cycles_id' => $this->cycles_id,
-            'purchase_order_id' => $this->purchase_order_id, 
+        'patient' => $this->patient ? [
+            'id' => $this->patient->id,
+            'name' => $this->patient->name,
+            'number' => $this->patient->number,
+        ] : null,
+        'cycles_id' => $this->cycles_id,
+        'cycle' => $this->cycle ? [
+            'id' => $this->cycle->id,
+            'name' => $this->cycle->name,
+        ] : null,
+        'purchase_order_id' => $this->purchase_order_id,
+        'purchase_order' => $this->purchase_order ? [
+            'id' => $this->purchase_order->id,
+            'full_number' => $this->purchase_order->prefix . '-' . $this->purchase_order->id,
+        ] : null,
             'order_note' => $order_note
         ];
     }

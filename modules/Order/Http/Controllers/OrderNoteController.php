@@ -45,6 +45,7 @@
     use Modules\Order\Http\Resources\OrderNoteCollection;
     use Modules\Order\Http\Resources\OrderNoteDocumentCollection;
     use Modules\Order\Http\Resources\OrderNoteResource;
+    use Modules\Order\Http\Resources\OrderNoteResource2;
     use Modules\Order\Mail\OrderNoteEmail;
     use Modules\Order\Models\OrderNote;
     use Modules\Order\Models\OrderNoteItem;

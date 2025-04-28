@@ -552,6 +552,9 @@ export default {
                 this.form.payment_method_type_id = data.payment_method_type_id;
                 this.form.currency_type_id = data.currency_type_id;
                 this.form.quotation_id = data.id;
+                this.form.cycles_id = data.cycles_id;
+                this.form.patients_id = data.patients_id;
+                this.form.purchase_order_id = data.purchase_order_id;
               }
             })
             .catch((error) => {

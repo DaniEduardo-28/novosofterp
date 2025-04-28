@@ -49,7 +49,7 @@ class SaleNoteResource2 extends JsonResource
             'total_value' => $this->total_value,
             'total' => $this->total,
             'patients_id' => $this->patients_id,
-'cycles_id' => $this->cycles_id,
+            'cycles_id' => $this->cycles_id,
             'operation_type_id' => $this->operation_type_id,
             'date_of_due' => $this->date_of_due,
             'items' => $this->items,

@@ -1049,6 +1049,8 @@ export default {
       this.document.total_discount = q.total_discount;
       this.document.total_exportation = q.total_exportation;
       this.document.total_free = q.total_free;
+      this.document.patients_id = q.patients_id;
+      this.document.cycles_id = q.cycles_id;
       this.document.total_taxed = q.total_taxed;
       this.document.total_unaffected = q.total_unaffected;
       this.document.total_exonerated = q.total_exonerated;
