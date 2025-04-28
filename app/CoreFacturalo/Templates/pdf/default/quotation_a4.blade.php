@@ -144,6 +144,18 @@
                 @endif
             </td>
         </tr>
+        <tr>
+            <td class="align-top">Paciente:</td>
+            <td colspan="3">
+                {{ $document->patient->name. " - ciclo Nº". $document->cycle->name }}
+            </td>
+        </tr>
+        <tr>
+            <td class="align-top">Orden de compra:</td>
+            <td colspan="3">
+                {{ $document->purchase_order->prefix . "-" . $document->purchase_order->id }}
+            </td>
+        </tr>
         @if ($document->contact)
             <tr>
                 <td class="align-top">Contacto:</td>

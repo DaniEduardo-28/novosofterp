@@ -150,6 +150,16 @@
                 </td>
             </tr>
         @endif
+        @if ($document->patients)
+            <tr>
+                <td>
+                    <p class="desc">Paciente:</p>
+                </td>
+                <td>
+                    <p class="desc">{{ $document->patients->name }}</p>
+                </td>
+            </tr>
+        @endif
         @if ($document->observation)
             <tr>
                 <td>

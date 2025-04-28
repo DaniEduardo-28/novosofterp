@@ -115,6 +115,12 @@
             <td colspan="3">{{ $document->purchase_order }}</td>
         </tr>
     @endif
+    <tr>
+        <td class="align-top">Paciente:</td>
+        <td colspan="3">
+            {{ $document->patients->name. " - ciclo Nº". $document->cycles->name }}
+        </td>
+    </tr>
 </table>
 
 @if ($document->guides)
