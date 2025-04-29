@@ -118,7 +118,12 @@
     <tr>
         <td class="align-top">Paciente:</td>
         <td colspan="3">
-            {{ $document->patients->name. " - ciclo Nº". $document->cycles->name }}
+            {{
+                optional($document->patients)->name && optional($document->patients)->last_name
+                    ? mb_strtoupper(optional($document->patients)->name . ' ' . optional($document->patients)->last_name) . 
+                      (optional($document->cycles)->name ? ' - CICLO Nº ' . mb_strtoupper(optional($document->cycles)->name) : '')
+                    : ' '
+            }}
         </td>
     </tr>
 </table>
