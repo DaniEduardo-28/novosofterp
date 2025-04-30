@@ -105,7 +105,7 @@ class ItemSetController extends Controller
             ->whereTypeUser()
             ->whereNotIsSet()
             ->whereIsActive()
-            ->with(['brand', 'laboratory'])
+            ->with(['brand', 'laboratory', 'item_unit_types'])
             ->get()
             ->transform(function ($row) {
                 $full_description = ($row->internal_id) ? $row->internal_id . ' - ' . utf8_encode($row->description) : utf8_encode($row->description);
@@ -124,6 +124,7 @@ class ItemSetController extends Controller
                     'laboratory' => $laboratory,
                     'description' => utf8_encode($row->description),
                     'stock' => (int)$stock,
+                    'item_unit_types' => $row->item_unit_types,
                     'sale_unit_price' => $row->sale_unit_price,
                     'currency_type_id' => $currency->currency_type_id,
                     'currency_type_symbol' => $currency->symbol,
