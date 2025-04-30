@@ -118,12 +118,22 @@
             {{ $document->user->name }}
         </td>
     </tr>
+    @if ($document->patients_id)
     <tr>
         <td class="align-top">Paciente:</td>
         <td colspan="3">
-            {{ $document->patient->name. " - ciclo Nº". $document->cycle->name }}
+            {{ $document->patient->name. ' ' . $document->patient->last_name }}
         </td>
     </tr>
+    @endif
+    @if ($document->cycles_id)
+    <tr>
+        <td class="align-top">Ciclo:</td>
+        <td colspan="3">
+            {{ $document->cycle->name }}
+        </td>
+    </tr>
+    @endif
     <tr>
         <td class="align-top">Orden de compra:</td>
         <td colspan="3">
@@ -195,7 +205,7 @@
             <td class="text-left">
                 {!!$row->getTemplateDescription() !!}
                 @if (!empty($item->presentation)) {!!$item->presentation->description!!} @endif
-                @if($row->attributes)
+                {{-- @if($row->attributes)
                     @foreach($row->attributes as $attr)
                         <br/><span style="font-size: 9px">{!! $attr->description !!} : {{ $attr->value }}</span>
                     @endforeach
@@ -204,7 +214,7 @@
                     @foreach($row->discounts as $dtos)
                         <br/><span style="font-size: 9px">{{ $dtos->factor * 100 }}% {{$dtos->description }}</span>
                     @endforeach
-                @endif
+                @endif --}}
             </td>
 
             <td class="text-center align-top">

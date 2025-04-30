@@ -17,7 +17,7 @@
                 <div class="col-md-6">
                     <div :class="{ 'has-danger': errors.number }" class="form-group">
                         <label class="control-label">Número</label>
-                        <el-input v-model="form.number" :maxlength="maxLength">
+                        <el-input v-model="form.number" @input="form.number = form.number.toUpperCase()" :maxlength="maxLength">
                             <template
                                 v-if="form.identity_document_type_id == '6' || form.identity_document_type_id == '1'">
                             </template>
@@ -31,14 +31,15 @@
                 <div class="col-md-6">
                     <div class="form-group" :class="{ 'has-danger': errors.name }">
                         <label>Nombres</label>
-                        <el-input v-model="form.name"></el-input>
+                        <el-input v-model="form.name" @input="form.name = form.name.toUpperCase()"></el-input>
                         <small class="form-control-feedback" v-if="errors.name" v-text="errors.name[0]"></small>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group" :class="{ 'has-danger': errors.last_name }">
                         <label>Apellidos</label>
-                        <el-input v-model="form.last_name"></el-input>
+                        <el-input v-model="form.last_name"
+                            @input="form.last_name = form.last_name.toUpperCase()"></el-input>
                         <small class="form-control-feedback" v-if="errors.last_name"
                             v-text="errors.last_name[0]"></small>
                     </div>
@@ -57,7 +58,7 @@
                 <div class="col-md-9">
                     <div class="form-group">
                         <label>Dirección</label>
-                        <el-input v-model="form.address"></el-input>
+                        <el-input v-model="form.address" @input="form.address = form.address.toUpperCase()"></el-input>
                     </div>
                 </div>
             </div>
@@ -237,6 +238,10 @@ export default {
         },
         submit() {
             this.loading_submit = true;
+            this.form.name = this.form.name ? this.form.name.toUpperCase() : '';
+            this.form.last_name = this.form.last_name ? this.form.last_name.toUpperCase() : '';
+            this.form.address = this.form.address ? this.form.address.toUpperCase() : '';
+            this.form.number = this.form.number ? this.form.number.toUpperCase() : '';
             console.log(this.form)
             this.$http.post(`/${this.resource}`, this.form)
                 .then(response => {

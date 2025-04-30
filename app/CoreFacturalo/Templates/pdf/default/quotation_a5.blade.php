@@ -136,18 +136,30 @@
             @endif
         </td>
     </tr>
-    <tr>
-        <td class="align-top">Paciente:</td>
-        <td colspan="3">
-            {{ $document->patient->name. " - ciclo Nº". $document->cycle->name }}
-        </td>
-    </tr>
-    <tr>
-        <td class="align-top">Orden de compra:</td>
-        <td colspan="3">
-            {{ $document->purchase_order->prefix . "-" . $document->purchase_order->id }}
-        </td>
-    </tr>
+    @if ($document->patients_id)
+        <tr>
+            <td class="align-top">Paciente:</td>
+            <td colspan="3">
+                {{ strtoupper($document->patient->name . ' ' . $document->patient->last_name) }}
+            </td>
+        </tr>
+        @endif
+        @if ($document->cycles_id)
+        <tr>
+            <td class="align-top">Ciclo:</td>
+            <td colspan="3">
+                {{ $document->cycle->name }}
+            </td>
+        </tr>
+        @endif
+        @if ($document->purchase_order_id)
+        <tr>
+            <td class="align-top">Orden de compra:</td>
+            <td colspan="3">
+                {{ $document->purchase_order->prefix . "-" . $document->purchase_order->id }}
+            </td>
+        </tr>
+        @endif
     @if ($document->contact)
     <tr>
         <td class="align-top">Contacto:</td>
@@ -238,7 +250,7 @@
                 @else
                     {!!$row->item->description!!}
                 @endif
-                @if (!empty($row->item->presentation)) {!!$row->item->presentation->description!!} @endif
+                {{-- @if (!empty($row->item->presentation)) {!!$row->item->presentation->description!!} @endif
                 @if($row->attributes)
                     @foreach($row->attributes as $attr)
                         <br/><span style="font-size: 9px">{!! $attr->description !!} : {{ $attr->value }}</span>
@@ -258,7 +270,7 @@
                 @endif
                   @if($row->item !== null && property_exists($row->item,'extra_attr_value') && $row->item->extra_attr_value != '')
                     <br/><span style="font-size: 9px">{{$row->item->extra_attr_name}}: {{ $row->item->extra_attr_value }}</span>
-                @endif
+                @endif --}}
             </td>
             <td class="text-left">{{ $brand }}</td>
             <td class="text-left">{{ $row->item->model ?? '' }}</td>

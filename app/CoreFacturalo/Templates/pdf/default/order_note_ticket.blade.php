@@ -62,7 +62,7 @@
         <td class="text-center pb-3 border-bottom"><h3>{{ $tittle }}</h3></td>
     </tr>
 </table>
-<table class="full-width">
+<table class="full-width mt-3">
     <tr>
         <td width="" class="pt-3"><p class="desc">F. Emisión:</p></td>
         <td width="" class="pt-3"><p class="desc">{{ $document->date_of_issue->format('Y-m-d') }}</p></td>
@@ -153,10 +153,22 @@
             <td><p class="desc">{{ $document->observation }}</p></td>
         </tr>
     @endif
-    @if ($document->purchase_order)
+    @if ($document->purchase_order_id)
         <tr>
             <td><p class="desc">Orden de Compra:</p></td>
-            <td><p class="desc">{{ $document->purchase_order }}</p></td>
+            <td><p class="desc">{{ $document->purchase_order->prefix . "-" . $document->purchase_order->id }}</p></td>
+        </tr>
+    @endif
+    @if ($document->patients_id)
+        <tr>
+            <td><p class="desc">Paciente:</p></td>
+            <td><p class="desc">{{ $document->patient->name. ' ' . $document->patient->last_name }}</p></td>
+        </tr>
+    @endif
+    @if ($document->cycles_id)
+        <tr>
+            <td><p class="desc">Ciclo:</p></td>
+            <td><p class="desc">{{ $document->cycle->name }}</p></td>
         </tr>
     @endif
 </table>
@@ -184,7 +196,7 @@
             <td class="text-center desc-9 align-top">{{ $row->item->unit_type_id }}</td>
             <td class="text-left desc-9 align-top">
                 {!!$row->getTemplateDescription()!!} @if (!empty($row->item->presentation)) {!!$row->item->presentation->description!!} @endif
-                @if($row->attributes)
+                {{-- @if($row->attributes)
                     @foreach($row->attributes as $attr)
                         <br/>{!! $attr->description !!} : {{ $attr->value }}
                     @endforeach
@@ -193,7 +205,7 @@
                     @foreach($row->discounts as $dtos)
                         <br/><small>{{ $dtos->factor * 100 }}% {{$dtos->description }}</small>
                     @endforeach
-                @endif
+                @endif --}}
             </td>
             <td class="text-right desc-9 align-top">{{ number_format($row->unit_price, 2) }}</td>
             <td class="text-right desc-9 align-top">{{ number_format($row->total, 2) }}</td>

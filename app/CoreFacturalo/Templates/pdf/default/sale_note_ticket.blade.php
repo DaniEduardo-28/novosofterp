@@ -157,14 +157,19 @@
             </td>
             <td>
                 <p class="desc">
-                    @if($document->patients)
-                        {{ mb_strtoupper(($document->patients->name ?? '') . ' ' . ($document->patients->last_name ?? '')) }}
-                        @if($document->cycles)
-                            - CICLO Nº {{ mb_strtoupper($document->cycles->name ?? '') }}
-                        @endif
-                    @else
-                        PACIENTE NO REGISTRADO
-                    @endif
+                    {{ strtoupper($document->patients->name . ' ' . $document->patients->last_name) }}
+                </p>
+            </td>
+        </tr>
+        @endif
+        @if ($document->cycles)
+        <tr>
+            <td>
+                <p class="desc">Ciclo:</p>
+            </td>
+            <td>
+                <p class="desc">
+                    {{ $document->cycles->name }}
                 </p>
             </td>
         </tr>
@@ -241,7 +246,7 @@
                         @else
                             {!! $row->item->description !!}
                         @endif
-                        @if (!empty($row->item->presentation))
+                        {{-- @if (!empty($row->item->presentation))
                             {!! $row->item->presentation->description !!}
                         @endif
                         @if ($row->attributes)
@@ -265,7 +270,7 @@
                         @if ($row->item->used_points_for_exchange ?? false)
                             <br>
                             <small>*** Canjeado por {{ $row->item->used_points_for_exchange }} puntos ***</small>
-                        @endif
+                        @endif --}}
 
                     </td>
                     <td class="text-right desc-9 align-top">{{ number_format($row->unit_price, 2) }}</td>

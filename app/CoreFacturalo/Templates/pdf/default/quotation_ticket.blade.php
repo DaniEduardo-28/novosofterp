@@ -257,13 +257,33 @@
             </tr>
         @endif
 
-        @if ($document->purchase_order)
+        @if ($document->purchase_order_id)
             <tr>
                 <td>
                     <p class="desc">Orden de Compra:</p>
                 </td>
                 <td>
-                    <p class="desc">{{ $document->purchase_order }}</p>
+                    <p class="desc">{{ $document->purchase_order->prefix . "-" . $document->purchase_order->id }}</p>
+                </td>
+            </tr>
+        @endif
+        @if ($document->patients_id)
+            <tr>
+                <td>
+                    <p class="desc">Paciente:</p>
+                </td>
+                <td>
+                    <p class="desc">{{ strtoupper($document->patient->name . ' ' . $document->patient->last_name) }}</p>
+                </td>
+            </tr>
+        @endif
+        @if ($document->cycles_id)
+            <tr>
+                <td>
+                    <p class="desc">Ciclo:</p>
+                </td>
+                <td>
+                    <p class="desc">{{ $document->cycle->name }}</p>
                 </td>
             </tr>
         @endif
@@ -306,7 +326,7 @@
                         @else
                             {!! $row->item->description !!}
                         @endif
-                        @if (!empty($row->item->presentation))
+                        {{-- @if (!empty($row->item->presentation))
                             {!! $row->item->presentation->description !!}
                         @endif
                         @if ($row->attributes)
@@ -329,7 +349,7 @@
                         @if ($row->item !== null && property_exists($row->item, 'extra_attr_value') && $row->item->extra_attr_value != '')
                             <br /><span style="font-size: 9px">{{ $row->item->extra_attr_name }}:
                                 {{ $row->item->extra_attr_value }}</span>
-                        @endif
+                        @endif --}}
                     </td>
                     <td class="text-right desc-9 align-top">{{ number_format($row->unit_value, 2) }}</td>
                     <td class="text-right desc-9 align-top">{{ number_format($row->total_base_igv, 2) }}</td>

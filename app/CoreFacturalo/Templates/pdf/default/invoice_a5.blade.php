@@ -238,6 +238,13 @@
             </tr>
         @endforeach
     @endif
+    @if ($document->patients_id)
+        <tr>
+            <td width="120px">PACIENTE</td>
+            <td width="8px">:</td>
+            <td>{{ strtoupper($document->patients->name . ' ' . $document->patients->last_name) }}</td>
+        </tr>
+    @endif
     @if ($document->purchase_order)
         <tr>
             <td width="120px">ORDEN DE COMPRA</td>
@@ -326,7 +333,7 @@
                     {!!$row->item->description!!}
                 @endif
 
-                @if($row->total_isc > 0)
+                {{-- @if($row->total_isc > 0)
                     <br/><span style="font-size: 9px">ISC : {{ $row->total_isc }} ({{ $row->percentage_isc }}%)</span>
                 @endif
 
@@ -369,12 +376,11 @@
                     @foreach ($itemSet->getItemsSet($row->item_id) as $item)
                         {{$item}}<br>
                     @endforeach
-                    {{-- {{join( "-", $itemSet->getItemsSet($row->item_id) )}} --}}
                 @endif
                 @if($document->has_prepayment)
                     <br>
                     *** Pago Anticipado ***
-                @endif
+                @endif --}}
             </td>
             <td class="text-left align-top">{{ $row->item->model ?? '' }}</td>
 

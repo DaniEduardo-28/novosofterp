@@ -416,6 +416,26 @@
                 </td>
             </tr>
         @endif
+        @if ($document->patients_id)
+            <tr>
+                <td>
+                    <p class="desc">Paciente:</p>
+                </td>
+                <td>
+                    <p class="desc">{{ strtoupper($document->patients->name . ' ' . $document->patients->last_name) }}</p>
+                </td>
+            </tr>
+        @endif
+        @if ($document->cycles_id)
+            <tr>
+                <td>
+                    <p class="desc">Ciclo:</p>
+                </td>
+                <td>
+                    <p class="desc">{{ $document->cycles->name }}</p>
+                </td>
+            </tr>
+        @endif
         @if ($document->quotation_id)
             <tr>
                 <td>
@@ -642,7 +662,7 @@
                             {!! $row->item->description !!}
                         @endif
 
-                        @if ($row->total_isc > 0)
+                        {{-- @if ($row->total_isc > 0)
                             <br />ISC : {{ $row->total_isc }} ({{ $row->percentage_isc }}%)
                         @endif
 
@@ -685,7 +705,6 @@
                             @foreach ($itemSet->getItemsSet($row->item_id) as $item)
                                 {{ $item }}<br>
                             @endforeach
-                            {{-- {{join( "-", $itemSet->getItemsSet($row->item_id) )}} --}}
                         @endif
 
                         @if ($row->item->used_points_for_exchange ?? false)
@@ -696,7 +715,7 @@
                         @if ($document->has_prepayment)
                             <br>
                             *** Pago Anticipado ***
-                        @endif
+                        @endif --}}
                     </td>
                     <td class="text-right desc-9 align-top">{{ number_format($row->unit_price, 2) }}</td>
                     <td class="text-right desc-9 align-top font-bold">{{ number_format($row->total, 2) }}</td>

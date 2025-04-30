@@ -115,17 +115,18 @@
             <td colspan="3">{{ $document->purchase_order }}</td>
         </tr>
     @endif
-    <tr>
-        <td class="align-top">Paciente:</td>
-        <td colspan="3">
-            {{
-                optional($document->patients)->name && optional($document->patients)->last_name
-                    ? mb_strtoupper(optional($document->patients)->name . ' ' . optional($document->patients)->last_name) . 
-                      (optional($document->cycles)->name ? ' - CICLO Nº ' . mb_strtoupper(optional($document->cycles)->name) : '')
-                    : ' '
-            }}
-        </td>
-    </tr>
+    @if ($document->patients_id)
+            <tr>
+                <td class="align-top">Paciente:</td>
+                <td colspan="3">{{ strtoupper($document->patients->name . ' ' . $document->patients->last_name) }}</td>
+            </tr>
+        @endif
+        @if ($document->cycles_id)
+            <tr>
+                <td class="align-top">Ciclo:</td>
+                <td colspan="3">{{ $document->cycles->name }}</td>
+            </tr>
+        @endif
 </table>
 
 @if ($document->guides)
@@ -175,7 +176,7 @@
                 @else
                     {!!$row->item->description!!}
                 @endif
-                    @if (!empty($row->item->presentation)) {!!$row->item->presentation->description!!} @endif
+                    {{-- @if (!empty($row->item->presentation)) {!!$row->item->presentation->description!!} @endif
                 @if($row->attributes)
                     @foreach($row->attributes as $attr)
                         <br/><span style="font-size: 9px">{!! $attr->description !!} : {{ $attr->value }}</span>
@@ -193,7 +194,7 @@
                  @foreach ($itemSet->getItemsSet($row->item_id) as $item)
                      {{$item}}<br>
                  @endforeach
-                @endif
+                @endif --}}
             </td>
             <td class="text-right align-top">{{ number_format($row->unit_price, 2) }}</td>
             <td class="text-right align-top">

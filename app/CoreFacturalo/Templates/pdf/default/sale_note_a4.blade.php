@@ -130,17 +130,18 @@
                 <td colspan="3">{{ $document->purchase_order }}</td>
             </tr>
         @endif
-        <tr>
-            <td class="align-top">Paciente:</td>
-            <td colspan="3">
-                {{
-                    optional($document->patients)->name && optional($document->patients)->last_name
-                        ? mb_strtoupper(optional($document->patients)->name . ' ' . optional($document->patients)->last_name) . 
-                          (optional($document->cycles)->name ? ' - CICLO Nº ' . mb_strtoupper(optional($document->cycles)->name) : '')
-                        : ' '
-                }}
-            </td>
-        </tr>
+        @if ($document->patients_id)
+            <tr>
+                <td class="align-top">Paciente:</td>
+                <td colspan="3">{{ strtoupper($document->patients->name . ' ' . $document->patients->last_name) }}</td>
+            </tr>
+        @endif
+        @if ($document->cycles_id)
+            <tr>
+                <td class="align-top">Ciclo:</td>
+                <td colspan="3">{{ $document->cycles->name }}</td>
+            </tr>
+        @endif
     </table>
 
     @if ($document->isPointSystem())
@@ -206,7 +207,7 @@
                         @else
                             {!! $row->item->description !!}
                         @endif
-                        @if (!empty($row->item->presentation))
+                        {{-- @if (!empty($row->item->presentation))
                             {!! $row->item->presentation->description !!}
                         @endif
 
@@ -234,7 +235,7 @@
                             <br>
                             <span style="font-size: 9px">*** Canjeado por {{ $row->item->used_points_for_exchange }}
                                 puntos ***</span>
-                        @endif
+                        @endif --}}
 
                     </td>
                     <td class="text-center align-top">

@@ -22,7 +22,6 @@ class PatientsRequest extends FormRequest
             ],
             'number' => [
                 'nullable',
-                'numeric',
             ],
             'name' => [
                 'required',

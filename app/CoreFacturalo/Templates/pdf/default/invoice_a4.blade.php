@@ -495,69 +495,16 @@
                     <td class="text-center align-top">{{ $row->item->unit_type_id }}</td>
                     <td class="text-left align-top">
                         @if ($row->name_product_pdf)
-                            {!! $row->name_product_pdf !!}
+                            {{ strip_tags($row->name_product_pdf) }}
                         @else
-                            {!! $row->item->description !!}
-                        @endif
-
-                        @if ($row->total_isc > 0)
-                            <br /><span style="font-size: 9px">ISC : {{ $row->total_isc }}
-                                ({{ $row->percentage_isc }}%)</span>
-                        @endif
-
-                        @if (!empty($row->item->presentation))
-                            {!! $row->item->presentation->description !!}
-                        @endif
-
-                        @if ($row->total_plastic_bag_taxes > 0)
-                            <br /><span style="font-size: 9px">ICBPER : {{ $row->total_plastic_bag_taxes }}</span>
-                        @endif
-
-                        @if ($row->attributes)
-                            @foreach ($row->attributes as $attr)
-                                <br /><span style="font-size: 9px">{!! $attr->description !!} :
-                                    {{ $attr->value }}</span>
-                            @endforeach
-                        @endif
-                        @if ($row->discounts)
-                            @foreach ($row->discounts as $dtos)
-                                <br /><span style="font-size: 9px">{{ $dtos->factor * 100 }}%
-                                    {{ $dtos->description }}</span>
-                            @endforeach
-                        @endif
-
-                        @if ($row->charges)
-                            @foreach ($row->charges as $charge)
-                                <br /><span style="font-size: 9px">{{ $document->currency_type->symbol }}
-                                    {{ $charge->amount }} ({{ $charge->factor * 100 }}%)
-                                    {{ $charge->description }}</span>
-                            @endforeach
-                        @endif
-
-                        @if ($row->item->is_set == 1 && $itemxd->set_is_print)
-                            <br>
-                            @inject('itemSet', 'App\Services\ItemSetService')
-                            @foreach ($itemSet->getItemsSet($row->item_id) as $item)
-                                {{ $item }}<br>
-                            @endforeach
-                        @endif
-
-                        @if ($row->item->used_points_for_exchange ?? false)
-                            <br>
-                            <span style="font-size: 9px">*** Canjeado por {{ $row->item->used_points_for_exchange }}
-                                puntos ***</span>
-                        @endif
-
-                        @if ($document->has_prepayment)
-                            <br>
-                            *** Pago Anticipado ***
+                            {{ $row->item->description }}
                         @endif
                     </td>
                     <td class="text-center align-top">
-                        {{ $itemxd->patients->name }}
+                        {{ $document->patients->name }} {{ $document->patients->last_name }}
                     </td>
                     <td class="text-center align-top">
-                        {{ $itemxd->cycles->name }}
+                        {{ $document->cycles->name }}
                     </td>
                     {{-- <td class="text-center align-top">
                         @inject('itemLotGroup', 'App\Services\ItemLotsGroupService')

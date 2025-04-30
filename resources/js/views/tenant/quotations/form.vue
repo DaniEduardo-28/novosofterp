@@ -153,24 +153,54 @@
                             </div>
 
                             <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label class="control-label">Paciente</label>
-                                    <el-select v-model="form.patients_id" filterable clearable
-                                        placeholder="Seleccione un paciente">
+                                <div class="form-group" :class="{ 'has-danger': errors.patients_id }">
+                                    <label class="control-label"> Paciente </label>
+                                    <a v-if="form_patients.add == false"
+                                        class="control-label font-weight-bold text-info" href="#"
+                                        @click="form_patients.add = true">
+                                        [ + Nuevo]</a>
+                                    <a v-if="form_patients.add == true" class="control-label font-weight-bold text-info"
+                                        href="#" @click="savePatients()">
+                                        [ + Guardar]</a>
+                                    <a v-if="form_patients.add == true"
+                                        class="control-label font-weight-bold text-danger" href="#"
+                                        @click="form_patients.add = false">
+                                        [ Cancelar]</a>
+                                    <el-input v-if="form_patients.add == true" v-model="form_patients.name"
+                                        dusk="item_code" style="margin-bottom: 1.5%"></el-input>
+                                    <el-select v-if="form_patients.add == false" v-model="form.patients_id" clearable
+                                        filterable>
                                         <el-option v-for="option in patients" :key="option.id" :value="option.id"
-                                            :label="option.name" />
+                                            :label="option.name + (option.last_name ? ', ' + option.last_name : '')"></el-option>
                                     </el-select>
+                                    <small class="form-control-feedback" v-if="errors.patients_id"
+                                        v-text="errors.patients_id[0]"></small>
                                 </div>
                             </div>
 
                             <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label class="control-label">Ciclo</label>
-                                    <el-select v-model="form.cycles_id" filterable clearable
-                                        placeholder="Seleccione un ciclo">
-                                        <el-option v-for="option in cycles" :key="option.id" :value="option.id"
-                                            :label="option.name" />
+                                <div :class="{ 'has-danger': errors.cycles_id }" class="form-group">
+                                    <label class="control-label"> Ciclos </label>
+
+                                    <a v-if="form_cycles.add == false" class="control-label font-weight-bold text-info"
+                                        href="#" @click="form_cycles.add = true">
+                                        [ + Nuevo]</a>
+                                    <a v-if="form_cycles.add == true" class="control-label font-weight-bold text-info"
+                                        href="#" @click="saveCycles()">
+                                        [ + Guardar]</a>
+                                    <a v-if="form_cycles.add == true" class="control-label font-weight-bold text-danger"
+                                        href="#" @click="form_cycles.add = false">
+                                        [ Cancelar]</a>
+                                    <el-input v-if="form_cycles.add == true" v-model="form_cycles.name" dusk="item_code"
+                                        style="margin-bottom: 1.5%"></el-input>
+
+                                    <el-select v-if="form_cycles.add == false" v-model="form.cycles_id" clearable
+                                        filterable>
+                                        <el-option v-for="option in cycles" :key="option.id" :label="option.name"
+                                            :value="option.id"></el-option>
                                     </el-select>
+                                    <small v-if="errors.cycles_id" class="form-control-feedback"
+                                        v-text="errors.cycles_id[0]"></small>
                                 </div>
                             </div>
 
@@ -365,7 +395,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-6 d-flex align-items-end"  v-if="form.customer_id">
+                            <div class="col-lg-12 col-md-6 d-flex align-items-end" v-if="form.customer_id">
                                 <div class="form-group">
                                     <button type="button" class="btn waves-effect waves-light btn-primary"
                                         @click="clickAddItem">+ Agregar
@@ -382,7 +412,7 @@
                                     currency_type.symbol }} {{
                                         form.total_exportation }}</p>
                                 <p class="text-right" v-if="form.total_free > 0">OP.GRATUITAS: {{ currency_type.symbol
-                                    }} {{ form.total_free }}
+                                }} {{ form.total_free }}
                                 </p>
                                 <p class="text-right" v-if="form.total_unaffected > 0">OP.INAFECTAS: {{
                                     currency_type.symbol }} {{
@@ -461,6 +491,19 @@ export default {
             loading_form: false,
             errors: {},
             form: {},
+            form_cycles: { add: false, name: null, id: null },
+            form_patients: {
+                add: false,
+                name: null,
+                id: null,
+                identity_document_type_id: 1,
+                number: '00000000',
+                last_name: '',
+                address: '',
+                ubigeo: '010101',
+                phone: '',
+                email: null,
+            },
             currency_types: [],
             discount_types: [],
             charges_types: [],
@@ -1013,6 +1056,42 @@ export default {
                 number: null,
                 identity_document_type_id: null
             }
+        },
+        saveCycles() {
+            this.form_cycles.add = false;
+
+            this.$http
+                .post(`/cycles`, this.form_cycles)
+                .then((response) => {
+                    if (response.data.success) {
+                        this.$message.success(response.data.message);
+                        this.cycles.push(response.data.data);
+                        this.form_cycles.name = null;
+                    } else {
+                        this.$message.error("No se guardaron los cambios");
+                    }
+                })
+                .catch((error) => { });
+        },
+        savePatients() {
+            this.form_patients.add = false;
+
+            this.form_patients.name = this.form_patients.name ? this.form_patients.name.toUpperCase() : '';
+            this.form_patients.last_name = this.form_patients.last_name ? this.form_patients.last_name.toUpperCase() : '';
+            this.form_patients.address = this.form_patients.address ? this.form_patients.address.toUpperCase() : '';
+
+            this.$http
+                .post(`/patient`, this.form_patients)
+                .then((response) => {
+                    if (response.data.success) {
+                        this.$message.success(response.data.message);
+                        this.patients.push(response.data.data);
+                        this.form_patients.name = null;
+                    } else {
+                        this.$message.error("No se guardaron los cambios");
+                    }
+                })
+                .catch((error) => { });
         },
     }
 }
