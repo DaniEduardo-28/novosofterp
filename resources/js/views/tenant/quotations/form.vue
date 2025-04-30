@@ -210,7 +210,7 @@
                                     <el-select v-model="form.purchase_order_id" filterable clearable
                                         placeholder="Seleccione una orden">
                                         <el-option v-for="option in purchase_orders" :key="option.id" :value="option.id"
-                                            :label="option.number" />
+                                        :label="`${option.prefix}-${option.id}`" />
                                     </el-select>
                                 </div>
                             </div>
