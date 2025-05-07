@@ -320,7 +320,7 @@ class DispatchController extends Controller
 
     public function store(DispatchRequest $request)
     {
-        dd($request->all());
+
         $company = Company::query()
             ->select('soap_type_id')
             ->first();

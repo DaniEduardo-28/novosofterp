@@ -1,6 +1,9 @@
 @php
     $establishment = $document->establishment;
     $customer = $document->customer;
+    $quotation = $document->reference_quotation;
+    $document_ref = $document->reference_document;
+    $sale_note = $document->sale_note;
     //$path_style = app_path('CoreFacturalo'.DIRECTORY_SEPARATOR.'Templates'.DIRECTORY_SEPARATOR.'pdf'.DIRECTORY_SEPARATOR.'style.css');
 
     $document_number = $document->series . '-' . str_pad($document->number, 8, '0', STR_PAD_LEFT);
@@ -80,6 +83,44 @@
             <tr>
                 <td>Vendedor: {{ $document->user->name }}</td>
             </tr>
+
+
+@if (optional($document_ref)->patients && optional($document_ref->patients)->name && optional($document_ref->patients)->last_name)
+    <tr>
+        <td>Paciente: {{ strtoupper(optional($document_ref->patients)->name . ' ' . optional($document_ref->patients)->last_name) }}</td>
+    </tr>
+@endif
+@if (optional($document_ref)->cycles && optional($document_ref->cycles)->name)
+    <tr>
+        <td>Ciclo: {{ optional($document_ref->cycles)->name }}</td>
+    </tr>
+@endif
+
+
+@if (optional($quotation)->patient && optional($quotation->patient)->name && optional($quotation->patient)->last_name)
+    <tr>
+        <td>Paciente: {{ strtoupper(optional($quotation->patient)->name . ' ' . optional($quotation->patient)->last_name) }}</td>
+    </tr>
+@endif
+@if (optional($quotation)->cycle && optional($quotation->cycle)->name)
+    <tr>
+        <td>Ciclo: {{ optional($quotation->cycle)->name }}</td>
+    </tr>
+@endif
+
+
+@if (optional($sale_note)->patients && optional($sale_note->patients)->name && optional($sale_note->patients)->last_name)
+    <tr>
+        <td>Paciente: {{ strtoupper(optional($sale_note->patients)->name . ' ' . optional($sale_note->patients)->last_name) }}</td>
+    </tr>
+@endif
+@if (optional($sale_note)->cycles && optional($sale_note->cycles)->name)
+    <tr>
+        <td>Ciclo: {{ optional($sale_note->cycles)->name }}</td>
+    </tr>
+@endif
+
+
         </tbody>
     </table>
     <table class="full-width border-box mt-10 mb-10">
@@ -180,8 +221,6 @@
                 <th class="border-top-bottom py-2 text-center">Item</th>
                 <th class="border-top-bottom py-2 text-center">Código</th>
                 <th class="border-top-bottom py-2 text-left">Descripción</th>
-                <th class="border-top-bottom py-2 text-center">Paciente</th>
-                <th class="border-top-bottom py-2 text-center">Ciclo</th>
                 <th class="border-top-bottom py-2 text-center">Unidad</th>
                 <th class="border-top-bottom py-2 text-center">Cantidad</th>
             </tr>
@@ -201,7 +240,7 @@
                             {!! $row->item->description !!}
                         @endif
 
-                        @if (!empty($row->item->presentation))
+                        {{-- @if (!empty($row->item->presentation))
                             {!! $row->item->presentation->description !!}
                         @endif
 
@@ -216,7 +255,7 @@
                                 <br /><span style="font-size: 9px">{{ $dtos->factor * 100 }}%
                                     {{ $dtos->description }}</span>
                             @endforeach
-                        @endif
+                        @endif --}}
 
                         {{-- @if ($row->relation_item->is_set == 1)
                             <br>
@@ -226,16 +265,10 @@
                             @endforeach
                         @endif --}}
 
-                        @if ($document->has_prepayment)
+                        {{-- @if ($document->has_prepayment)
                             <br>
                             *** Pago Anticipado ***
-                        @endif
-                    </td>
-                    <td class="text-center align-top">
-                        {{ $itemxd->patients->name }}
-                    </td>
-                    <td class="text-center align-top">
-                        {{ $itemxd->cycles->name }}
+                        @endif --}}
                     </td>
                     <td class="text-center py-2">{{ $row->item->unit_type_id }}</td>
                     <td class="text-center py-2">
