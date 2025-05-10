@@ -221,6 +221,7 @@
                 <th class="border-top-bottom py-2 text-center">Item</th>
                 <th class="border-top-bottom py-2 text-center">Código</th>
                 <th class="border-top-bottom py-2 text-left">Descripción</th>
+                <th class="border-top-bottom py-2 text-left">Lote / Fecha Venc.</th>
                 <th class="border-top-bottom py-2 text-center">Unidad</th>
                 <th class="border-top-bottom py-2 text-center">Cantidad</th>
             </tr>
@@ -270,6 +271,10 @@
                             *** Pago Anticipado ***
                         @endif --}}
                     </td>
+                    <td class="text-center py-2">
+                        @inject('itemLotGroup', 'App\Services\ItemLotsGroupService')
+                        {{ $itemLotGroup->getLoteWithDate($row->item->IdLoteSelected) }}
+                    </td>
                     <td class="text-center py-2">{{ $row->item->unit_type_id }}</td>
                     <td class="text-center py-2">
                         @if ((int) $row->quantity != $row->quantity)
@@ -280,7 +285,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="8" class="border-bottom"></td>
+                    <td colspan="9" class="border-bottom"></td>
                 </tr>
             @endforeach
         </tbody>
