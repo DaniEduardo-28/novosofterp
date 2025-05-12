@@ -220,6 +220,7 @@
                 <th class="border-top-bottom text-center py-2" width="8%">CANT.</th>
                 <th class="border-top-bottom text-center py-2" width="8%">UNIDAD</th>
                 <th class="border-top-bottom text-left py-2">DESCRIPCIÓN</th>
+                <th class="border-top-bottom text-center py-2">LOTE / FECHA VENC.</th>
                 <th class="border-top-bottom text-right py-2" width="12%">P.UNIT</th>
                 <th class="border-top-bottom text-right py-2" width="8%">DTO.</th>
                 <th class="border-top-bottom text-right py-2" width="12%">TOTAL</th>
@@ -274,6 +275,12 @@
                             @endforeach
                         @endif --}}
 
+                    </td>
+                    <td class="text-center py-2">
+                        @inject('itemLotGroup', 'App\Services\ItemLotsGroupService')
+                        @foreach ($row->relation_item->lots_group as $lot)
+                {{ $itemLotGroup->getLoteWithDate($lot->id) }}<br>
+            @endforeach
                     </td>
                     <td class="text-right align-top">{{ number_format($row->unit_price, 2) }}</td>
                     <td class="text-right align-top">
