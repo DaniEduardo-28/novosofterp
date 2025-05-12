@@ -240,40 +240,10 @@
                         @else
                             {!! $row->item->description !!}
                         @endif
-
-                        {{-- @if (!empty($row->item->presentation))
-                            {!! $row->item->presentation->description !!}
-                        @endif
-
-                        @if ($row->attributes)
-                            @foreach ($row->attributes as $attr)
-                                <br /><span style="font-size: 9px">{!! $attr->description !!} : {{ $attr->value }}</span>
-                            @endforeach
-                        @endif
-
-                        @if ($row->discounts)
-                            @foreach ($row->discounts as $dtos)
-                                <br /><span style="font-size: 9px">{{ $dtos->factor * 100 }}%
-                                    {{ $dtos->description }}</span>
-                            @endforeach
-                        @endif --}}
-
-                        {{-- @if ($row->relation_item->is_set == 1)
-                            <br>
-                            @inject('itemSet', 'App\Services\ItemSetService')
-                            @foreach ($itemSet->getItemsSet($row->item_id) as $item)
-                                {{ $item }}<br>
-                            @endforeach
-                        @endif --}}
-
-                        {{-- @if ($document->has_prepayment)
-                            <br>
-                            *** Pago Anticipado ***
-                        @endif --}}
                     </td>
                     <td class="text-center py-2">
                         @inject('itemLotGroup', 'App\Services\ItemLotsGroupService')
-                        {{ $itemLotGroup->getLoteWithDate($row->item->IdLoteSelected) }}
+                         {{ $itemLotGroup->getLoteWithDate($row->item->IdLoteSelected) }}
                     </td>
                     <td class="text-center py-2">{{ $row->item->unit_type_id }}</td>
                     <td class="text-center py-2">
