@@ -3,6 +3,7 @@
 namespace App\Models\Tenant;
 
 use App\Traits\AttributePerItems;
+use App\Models\Tenant\Item;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
