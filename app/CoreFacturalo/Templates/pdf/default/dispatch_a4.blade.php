@@ -257,7 +257,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="9" class="border-bottom"></td>
+                    <td colspan="10" class="border-bottom"></td>
                 </tr>
             @endforeach
         </tbody>

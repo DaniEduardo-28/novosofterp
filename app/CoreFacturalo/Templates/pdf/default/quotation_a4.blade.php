@@ -299,58 +299,58 @@
                     <td class="text-right align-top">{{ number_format($row->total, 2) }}</td>
                 </tr>
                 <tr>
-                    <td colspan="6" class="border-bottom"></td>
+                    <td colspan="7" class="border-bottom"></td>
                 </tr>
             @endforeach
             @if ($document->total_exportation > 0)
                 <tr>
-                    <td colspan="5" class="text-right font-bold">OP. EXPORTACIÓN:
+                    <td colspan="6" class="text-right font-bold">OP. EXPORTACIÓN:
                         {{ $document->currency_type->symbol }}</td>
                     <td class="text-right font-bold">{{ number_format($document->total_exportation, 2) }}</td>
                 </tr>
             @endif
             @if ($document->total_free > 0)
                 <tr>
-                    <td colspan="5" class="text-right font-bold">OP. GRATUITAS:
+                    <td colspan="6" class="text-right font-bold">OP. GRATUITAS:
                         {{ $document->currency_type->symbol }}</td>
                     <td class="text-right font-bold">{{ number_format($document->total_free, 2) }}</td>
                 </tr>
             @endif
             @if ($document->total_unaffected > 0)
                 <tr>
-                    <td colspan="5" class="text-right font-bold">OP. INAFECTAS:
+                    <td colspan="6" class="text-right font-bold">OP. INAFECTAS:
                         {{ $document->currency_type->symbol }}</td>
                     <td class="text-right font-bold">{{ number_format($document->total_unaffected, 2) }}</td>
                 </tr>
             @endif
             @if ($document->total_exonerated > 0)
                 <tr>
-                    <td colspan="5" class="text-right font-bold">OP. EXONERADAS:
+                    <td colspan="6" class="text-right font-bold">OP. EXONERADAS:
                         {{ $document->currency_type->symbol }}</td>
                     <td class="text-right font-bold">{{ number_format($document->total_exonerated, 2) }}</td>
                 </tr>
             @endif
             @if ($document->total_taxed > 0)
                 <tr>
-                    <td colspan="5" class="text-right font-bold">OP. GRAVADAS:
+                    <td colspan="6" class="text-right font-bold">OP. GRAVADAS:
                         {{ $document->currency_type->symbol }}</td>
                     <td class="text-right font-bold">{{ number_format($document->total_taxed, 2) }}</td>
                 </tr>
             @endif
             @if ($document->total_discount > 0)
                 <tr>
-                    <td colspan="5" class="text-right font-bold">
+                    <td colspan="6" class="text-right font-bold">
                         {{ $document->total_prepayment > 0 ? 'ANTICIPO' : 'DESCUENTO TOTAL' }}:
                         {{ $document->currency_type->symbol }}</td>
                     <td class="text-right font-bold">{{ number_format($document->total_discount, 2) }}</td>
                 </tr>
             @endif
             <tr>
-                <td colspan="5" class="text-right font-bold">IGV: {{ $document->currency_type->symbol }}</td>
+                <td colspan="6" class="text-right font-bold">IGV: {{ $document->currency_type->symbol }}</td>
                 <td class="text-right font-bold">{{ number_format($document->total_igv, 2) }}</td>
             </tr>
             <tr>
-                <td colspan="5" class="text-right font-bold">TOTAL A PAGAR: {{ $document->currency_type->symbol }}
+                <td colspan="6" class="text-right font-bold">TOTAL A PAGAR: {{ $document->currency_type->symbol }}
                 </td>
                 <td class="text-right font-bold">{{ number_format($document->total, 2) }}</td>
             </tr>
