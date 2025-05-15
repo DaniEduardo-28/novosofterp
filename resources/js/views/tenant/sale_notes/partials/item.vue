@@ -1203,27 +1203,22 @@ export default {
 
         },
         validateIdLoteSelected(){
+    if (this.form.item.lots_enabled)
+    {
+        // Solo validar si hay lotes seleccionados
+        if (this.form.IdLoteSelected && this.form.IdLoteSelected.length > 0)
+        {
+            const compromise_quantity = parseFloat(_.sumBy(this.form.IdLoteSelected, 'compromise_quantity'))
 
-            if (this.form.item.lots_enabled)
+            if(compromise_quantity != parseFloat(this.form.quantity))
             {
-                if (!this.form.IdLoteSelected)
-                {
-                    return this.getResponseMessage(false, 'Debe seleccionar un lote.')
-                }
-                else
-                {
-                    const compromise_quantity = parseFloat(_.sumBy(this.form.IdLoteSelected, 'compromise_quantity'))
-
-                    if(compromise_quantity != parseFloat(this.form.quantity))
-                    {
-                        return this.getResponseMessage(false, 'La suma de cantidades comprometidas de los lotes debe der igual a la cantidad pedida.')
-                    }
-                }
+                return this.getResponseMessage(false, 'La suma de cantidades comprometidas de los lotes debe ser igual a la cantidad pedida.')
             }
-
-            return this.getResponseMessage(true)
-
-        },
+        }
+        // Si no hay lotes seleccionados, no hay error, es opcional
+    }
+    return this.getResponseMessage(true)
+},
         async clickAddItem() {
 
             // if(this.form.quantity < this.getMinQuantity()){
