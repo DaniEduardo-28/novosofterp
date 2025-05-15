@@ -2486,15 +2486,15 @@ onUpload(file) {
       if (this.form.has_perception && !this.form.percentage_perception)
         return this.$message.error("Ingrese un porcentaje");
 
-      if (this.form.lots_enabled && stock > 0) {
-        if (!this.form.lot_code)
-          return this.$message.error("Código de lote es requerido");
-
-        // if (!this.form.date_of_due)
-        //   return this.$message.error(
-        //     "Fecha de vencimiento es requerido si lotes esta habilitado."
-        //   );
-      }
+      //if (this.form.lots_enabled && stock > 0) {
+      //  if (!this.form.lot_code)
+      //    return this.$message.error("Código de lote es requerido");
+      //
+      //   if (!this.form.date_of_due)
+      //     return this.$message.error(
+      //      "Fecha de vencimiento es requerido si lotes esta habilitado."
+      //     );
+      //}
 
       if (!this.recordId && this.form.series_enabled) {
         if (this.form.lots.length > this.form.stock)

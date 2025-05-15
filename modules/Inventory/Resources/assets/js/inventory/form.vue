@@ -246,12 +246,12 @@ export default {
         async submit() {
             let total_qty =  this.form.quantity * 1;
             if (this.type === 'input') {
-                if (this.form.lots_enabled) {
+                /* if (this.form.lots_enabled) {
                     if (!this.form.lot_code)
                         return this.$message.error('Código de lote es requerido');
-                    // if (!this.form.date_of_due)
-                    //     return this.$message.error('Fecha de vencimiento es requerido si lotes esta habilitado.');
-                }
+                     if (!this.form.date_of_due)
+                         return this.$message.error('Fecha de vencimiento es requerido si lotes esta habilitado.');
+                } */
 
                 if (this.form.series_enabled) {
                     if (this.form.lots.length > total_qty)

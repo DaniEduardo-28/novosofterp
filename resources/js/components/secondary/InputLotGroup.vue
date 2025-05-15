@@ -67,8 +67,8 @@ export default {
     methods: {
         clickSubmit()
         {
-            if(!this.form.lot_code) return  this.$message.error('El campo código de lote es obligatorio.')
-            if(!this.form.date_of_due) return  this.$message.error('El campo fecha vencimiento es obligatorio.')
+            /* if(!this.form.lot_code) return  this.$message.error('El campo código de lote es obligatorio.')
+            if(!this.form.date_of_due) return  this.$message.error('El campo fecha vencimiento es obligatorio.') */
 
             this.$emit('saveInputLotGroup', {
                 data: this.form,

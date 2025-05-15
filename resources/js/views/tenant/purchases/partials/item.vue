@@ -949,13 +949,13 @@ export default {
             this.setGlobalIgvToItem()
         },
         async clickAddItem() {
-            if (this.form.item.lots_enabled) {
+            /* if (this.form.item.lots_enabled) {
                 if (!this.lot_code)
                     return this.$message.error('Código de lote es requerido');
 
-                // if (!this.form.date_of_due)
-                //     return this.$message.error('Fecha de vencimiento es requerido si lotes esta habilitado.');
-            }
+                 if (!this.form.date_of_due)
+                     return this.$message.error('Fecha de vencimiento es requerido si lotes esta habilitado.');
+            } */
 
             if (this.form.item.series_enabled) {
                 if (this.lots.length > this.form.quantity)

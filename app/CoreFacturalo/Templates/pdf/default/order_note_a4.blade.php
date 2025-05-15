@@ -205,16 +205,6 @@
             <td class="text-left">
                 {!!$row->getTemplateDescription() !!}
                 @if (!empty($item->presentation)) {!!$item->presentation->description!!} @endif
-                {{-- @if($row->attributes)
-                    @foreach($row->attributes as $attr)
-                        <br/><span style="font-size: 9px">{!! $attr->description !!} : {{ $attr->value }}</span>
-                    @endforeach
-                @endif
-                @if($row->discounts)
-                    @foreach($row->discounts as $dtos)
-                        <br/><span style="font-size: 9px">{{ $dtos->factor * 100 }}% {{$dtos->description }}</span>
-                    @endforeach
-                @endif --}}
             </td>
 
             <td class="text-center align-top">

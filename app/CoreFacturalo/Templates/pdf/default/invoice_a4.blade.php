@@ -495,11 +495,7 @@
                     </td>
                     <td class="text-center align-top">{{ $row->item->unit_type_id }}</td>
                     <td class="text-left align-top">
-                        @if ($row->name_product_pdf)
-                            {{ strip_tags($row->name_product_pdf) }}
-                        @else
                             {{ $row->item->description }}
-                        @endif
                     </td>
                     <td class="text-center align-top">
                         @inject('itemLotGroup', 'App\Services\ItemLotsGroupService')

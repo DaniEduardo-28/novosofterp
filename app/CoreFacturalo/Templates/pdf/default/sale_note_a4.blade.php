@@ -202,41 +202,7 @@
                     </td>
                     <td class="text-center align-top">{{ $row->item->unit_type_id }}</td>
                     <td class="text-left">
-                        @if ($row->name_product_pdf)
-                            {!! $row->name_product_pdf !!}
-                        @else
-                            {!! $row->item->description !!}
-                        @endif
-                        {{-- @if (!empty($row->item->presentation))
-                            {!! $row->item->presentation->description !!}
-                        @endif
-
-                        @if ($row->attributes)
-                            @foreach ($row->attributes as $attr)
-                                <br /><span style="font-size: 9px">{!! $attr->description !!} : {{ $attr->value }}</span>
-                            @endforeach
-                        @endif
-                        @if ($row->discounts)
-                            @foreach ($row->discounts as $dtos)
-                                <br /><span style="font-size: 9px">{{ $dtos->factor * 100 }}%
-                                    {{ $dtos->description }}</span>
-                            @endforeach
-                        @endif
-
-                        @if ($row->item->is_set == 1)
-                            <br>
-                            @inject('itemSet', 'App\Services\ItemSetService')
-                            @foreach ($itemSet->getItemsSet($row->item_id) as $item)
-                                {{ $item }}<br>
-                            @endforeach
-                        @endif
-
-                        @if ($row->item->used_points_for_exchange ?? false)
-                            <br>
-                            <span style="font-size: 9px">*** Canjeado por {{ $row->item->used_points_for_exchange }}
-                                puntos ***</span>
-                        @endif --}}
-
+                        {!! $row->item->description !!}
                     </td>
                     <td class="text-center align-top">
 

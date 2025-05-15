@@ -235,11 +235,7 @@
                     <td class="text-center py-2">{{ $loop->iteration }}</td>
                     <td class="text-center py-2">{{ $row->item->internal_id }}</td>
                     <td class="text-left py-2 align-top">
-                        @if ($row->name_product_pdf)
-                            {!! $row->name_product_pdf !!}
-                        @else
                             {!! $row->item->description !!}
-                        @endif
                     </td>
                     <td class="text-center py-2">
                         @inject('itemLotGroup', 'App\Services\ItemLotsGroupService')
