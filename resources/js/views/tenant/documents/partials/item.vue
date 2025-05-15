@@ -1424,10 +1424,10 @@ export default {
             // }
             this.validateQuantity()
 
-            if (this.form.item.lots_enabled) {
+            /* if (this.form.item.lots_enabled) {
                 if (!this.form.IdLoteSelected)
                     return this.$message.error('Debe seleccionar lote.');
-            }
+            } */
             let extra = this.form.item.extra
 
             if (this.validateTotalItem().total_item) return;
