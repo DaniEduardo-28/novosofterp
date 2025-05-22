@@ -4,6 +4,11 @@
     $quotation = $document->reference_quotation;
     $document_ref = $document->reference_document;
     $sale_note = $document->sale_note;
+
+    $quotation_items = $document->reference_quotation ? $document->reference_quotation->items : [];
+    $sale_note_items = $document->sale_note ? $document->sale_note->items : [];
+    $document_items = $document->reference_document ? $document->reference_document->items : [];
+
     //$path_style = app_path('CoreFacturalo'.DIRECTORY_SEPARATOR.'Templates'.DIRECTORY_SEPARATOR.'pdf'.DIRECTORY_SEPARATOR.'style.css');
 
     $document_number = $document->series . '-' . str_pad($document->number, 8, '0', STR_PAD_LEFT);
@@ -238,11 +243,33 @@
                             {!! $row->item->description !!}
                     </td>
                     <td class="text-center py-2">
-                        @inject('itemLotGroup', 'App\Services\ItemLotsGroupService')
-                        @foreach ($row->relation_item->lots_group as $lot)
-                {{ $itemLotGroup->getLoteWithDate($lot->id) }}<br>
-            @endforeach
+                        @php
+                            $lote_data = [];
+
+                            foreach ([$document_items ?? [], $quotation_items ?? [], $sale_note_items ?? []] as $items) {
+                                foreach ($items as $item) {
+                                    if (
+                                        isset($item->item_id, $row->item_id) &&
+                                        $item->item_id == $row->item_id &&
+                                        isset($item->item->IdLoteSelected) &&
+                                        is_array($item->item->IdLoteSelected)
+                                    ) {
+                                    $lote_data = $item->item->IdLoteSelected;
+                                    break 2;
+                                    }
+                                }
+                            }
+                        @endphp
+
+                        @if(!empty($lote_data))
+                            @foreach($lote_data as $lote)
+                                <div>{{ $lote->code ?? '-' }} / V: {{ $lote->date_of_due ?? '-' }}</div>
+                            @endforeach
+                        @else
+                        <span>-</span>
+                        @endif
                     </td>
+
                     <td class="text-center py-2">{{ $row->item->unit_type_id }}</td>
                     <td class="text-center py-2">
                         @if ((int) $row->quantity != $row->quantity)

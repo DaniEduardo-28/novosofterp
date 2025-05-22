@@ -241,16 +241,21 @@
                         @endif
                     </td>
                     <td class="text-center align-top">{{ $row->item->unit_type_id }}</td>
-                    <td class="text-left">
+                    <td class="text-left align-top">
                             {!! $row->item->description !!}
                     </td>
                     <td class="text-center py-2">
                         @inject('itemLotGroup', 'App\Services\ItemLotsGroupService')
-                        {{-- @foreach ($row->relation_item->lots_group as $lot)
-                            {{ $itemLotGroup->getLoteWithDate($lot->id) }}<br>
-                        @endforeach --}}
-                       {{ $itemLotGroup->getLoteWithDate($row->item->IdLoteSelected) }}
+
+                        @if(isset($row->item->IdLoteSelected) && is_array($row->item->IdLoteSelected) && count($row->item->IdLoteSelected) > 0)
+                            @foreach($row->item->IdLoteSelected as $lote)
+                                {{ $lote->code ?? '-' }} / V: {{ $lote->date_of_due ?? '-' }}<br>
+                            @endforeach
+                        @else
+                            <span>-</span>
+                        @endif
                     </td>
+
                     <td class="text-right align-top">{{ number_format($row->unit_price, 2) }}</td>
                     <td class="text-right align-top">
                         @if ($row->discounts)

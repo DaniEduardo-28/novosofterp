@@ -207,7 +207,7 @@ export default {
                     date_of_due: item.date_of_due,
                 }
             })
-            console.log(lots_selecteds);
+            console.log("Lotes elegidos: ",lots_selecteds);
             await this.$emit("addRowLotGroup", lots_selecteds);
             await this.$emit("update:showDialog", false);
         },
