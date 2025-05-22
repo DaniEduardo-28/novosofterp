@@ -55,10 +55,17 @@
             'name_product_pdf',
         ];
 
-
         public function getItemAttribute($value)
         {
             return (is_null($value)) ? null : (object)json_decode($value);
+        }
+
+        public function getArrayItem()
+        {
+            $item = (array) $this->item;
+            $item['IdLoteSelected'] = $item['IdLoteSelected'] ?? null;
+            // Puedes agregar otros campos predeterminados si quieres
+            return $item;
         }
 
         public function setItemAttribute($value)

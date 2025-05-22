@@ -1211,7 +1211,7 @@ export default {
             this.form.item.presentation = this.item_unit_type;
             this.form.affectation_igv_type = _.find(this.affectation_igv_types, {'id': affectation_igv_type_id});
 
-            // let IdLoteSelected = this.form.IdLoteSelected
+            let IdLoteSelected = this.form.IdLoteSelected
             // let document_item_id = this.form.document_item_id
             this.row = calculateRowItem(this.form, this.currencyTypeIdActive, this.exchangeRateSale, this.percentageIgv);
 
@@ -1236,7 +1236,7 @@ export default {
                 this.row.indexi = this.recordItem.indexi
             }
 
-            // this.row.IdLoteSelected = IdLoteSelected
+            this.row.IdLoteSelected = IdLoteSelected
             // this.row.document_item_id = document_item_id
 
             this.$emit('add', this.row);

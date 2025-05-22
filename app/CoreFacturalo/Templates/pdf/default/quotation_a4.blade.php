@@ -246,9 +246,10 @@
                     </td>
                     <td class="text-center py-2">
                         @inject('itemLotGroup', 'App\Services\ItemLotsGroupService')
-                        @foreach ($row->relation_item->lots_group as $lot)
-                {{ $itemLotGroup->getLoteWithDate($lot->id) }}<br>
-            @endforeach
+                        {{-- @foreach ($row->relation_item->lots_group as $lot)
+                            {{ $itemLotGroup->getLoteWithDate($lot->id) }}<br>
+                        @endforeach --}}
+                       {{ $itemLotGroup->getLoteWithDate($row->item->IdLoteSelected) }}
                     </td>
                     <td class="text-right align-top">{{ number_format($row->unit_price, 2) }}</td>
                     <td class="text-right align-top">
